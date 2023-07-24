@@ -16,17 +16,17 @@ body {
     justify-content: center;
     align-items: center;
     background-color: black;
-    width: 750px;
-    height: 750px;
+    width: 680px;
+    height: 680px;
 }
 
 .columns { 
    margin: -0.5px;
 }
 
-.singleGrids {
+.singleSquares {
     background-color: white;
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
     margin: 1px;
 }
