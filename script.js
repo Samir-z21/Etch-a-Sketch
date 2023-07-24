@@ -37,14 +37,30 @@ return column
 
 
 
-// code for changing square colors while hovering
+// function for changing square colors while hovering
 function changeColor(square) {
   square.style.backgroundColor = "grey";
 }
-
 squares.forEach((square) => {
   square.addEventListener('mousemove', () => {
     changeColor(square)
   });
 });
 
+
+const density = document.querySelectorAll("#density");
+density.forEach(button => {
+    button.addEventListener('click', function(e) {
+      if(e.target.innerText === "Small") {
+        
+      }
+
+      if(e.target.innerText === "Medium") {
+  
+      }
+
+      if(e.target.innerText === "Big") {
+  
+      }
+    })
+  });
