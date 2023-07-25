@@ -2,11 +2,18 @@
 const container = document.querySelector("#gridContainer");
 
 // declaring variables outside functions
-let singleSquare;
-let column;
-let wholeGrid;
-let squares = [];
-let numberOfSquares = 16;
+  // variables for the grid
+  let singleSquare;
+  let column;
+  let wholeGrid;
+  // variables for the hovering feature
+  let squares = [];
+  let numberOfSquares = 16;
+  // variables for gridChanges
+  let regular = true;
+  let gridChangedSmall = false;
+  let gridChangedMedium = false;
+  let gridChangedBig = false;
 
 // create grid and append it
 createGrid()
@@ -19,10 +26,10 @@ function createGrid() {
     let oneColumn = createColumn ();
     wholeGrid.appendChild(oneColumn);
    }
-   container.appendChild(wholeGrid)
+  container.appendChild(wholeGrid)
 
-   // function for changing square colors while hovering
-   squares.forEach((square) => {
+  // function for changing square colors while hovering
+  squares.forEach((square) => {
     square.addEventListener('mousemove', () => {
     changeColor(square)
     });
@@ -30,25 +37,33 @@ function createGrid() {
     
   function changeColor(square) {
   square.style.backgroundColor = "grey";
-}
+  }
    
 }
+
 // function to create a column with 16 single squares
 function createColumn () {
   column = document.createElement("div");
   column.className = 'columns';
    for (let i = 0; i <numberOfSquares; i++ ){
     singleSquare = document.createElement("div");
-    singleSquare.className = 'singleSquares';
+     if (regular) {
+      singleSquare.classList.add('singleSmallSquares')
+     } 
+      else if (gridChangedSmall) {
+      singleSquare.classList.add('singleSmallSquares')
+     } 
+     else if (gridChangedMedium) {
+      singleSquare.classList.add('singleMediumSquares')
+     } 
+     else if (gridChangedBig) {
+      singleSquare.classList.add('singleBigSquares')
+     }
     column.appendChild(singleSquare);
     squares.push(singleSquare);
 }
 return column
 }
-
-
-
-
 
 
 // Code to change grid density
@@ -57,28 +72,38 @@ density.forEach(button => {
     button.addEventListener('click', function(e) {
       if(e.target.innerText === "Small") {
         numberOfSquares = 16;
+        gridChangedSmall = true;
+        gridChangedMedium = false;
+        gridChangedBig = false;
+        //reseting everything for the new grid
         container.removeChild(wholeGrid);
         squares.length = 0;
-        const elementsToRemove = document.querySelectorAll(".columns, .wholeGrid, .singleSquares"); 
-        elementsToRemove.forEach(element => {
-        element.remove();
-        });
+        regular = false;
         createGrid();   
       }
 
       if(e.target.innerText === "Medium") {
-        numberOfSquares = 32
+        numberOfSquares = 32;
+        gridChangedSmall = false;
+        gridChangedMedium = true;
+        gridChangedBig = false;
+        //reseting everything for the new grid
         container.removeChild(wholeGrid);
-        wholeGrid.removeChild(oneColumn);
-        column.removeChild(singleSquare)
         squares.length = 0;
-        createGrid();
-        
+        regular = false;
+        createGrid();   
       }
 
       if(e.target.innerText === "Big") {
         numberOfSquares = 64
-      
+        gridChangedSmall = false;
+        gridChangedMedium = false;
+        gridChangedBig = true;
+        //reseting everything for the new grid
+        container.removeChild(wholeGrid);
+        squares.length = 0;
+        regular = false;
+        createGrid(); 
       }
     })
   });
