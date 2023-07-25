@@ -11,7 +11,8 @@ const container = document.querySelector("#gridContainer");
   let numberOfSquares = 16;
   // variables for gridChanges
   let currentClass = 'singleSmallSquares';
-  let currentColor = 'grey'
+  // variables for color changes
+  let currentColor = 'grey';
 
 // create grid and append it
 createGrid()
@@ -25,18 +26,18 @@ function createGrid() {
     wholeGrid.appendChild(oneColumn);
    } 
   container.appendChild(wholeGrid)
+
   // adding hovering effect
-  squares.forEach((square) => {
-    square.addEventListener('mousemove', () => {
-    changeColor(square,currentColor)
-    });
+    squares.forEach((square) => {
+      square.addEventListener('mousemove', () => {
+      changeColor(square,currentColor)
+      });
     });
     
    // function to change color
-function changeColor(square, currentColor) {
-  square.style.backgroundColor = currentColor;
-
-}
+    function changeColor(square, currentColor) {
+      square.style.backgroundColor = currentColor;
+    }
 }
 
 
@@ -99,4 +100,8 @@ buttons.forEach(button => {
     })
   });
 
-  const choseColor = document.querySelector('#colorPicker');
+  // code to input user color
+  const colorPicker = document.querySelector('#colorPicker');
+  colorPicker.addEventListener('input', () => {
+  currentColor = colorPicker.value;
+  });
