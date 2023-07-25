@@ -57,7 +57,7 @@ return column
 
 
 // Code to change grid density and/or clear grid
-const buttons = document.querySelectorAll("#buttons");
+const buttons = document.querySelectorAll(".buttons");
 buttons.forEach(button => {
     button.addEventListener('click', function(e) {
       if(e.target.innerText === "Small") {
@@ -92,10 +92,6 @@ buttons.forEach(button => {
         container.removeChild(wholeGrid);
         squares.length = 0;
         createGrid(); 
-      }
-
-      if(e.target.innerText === "Rainbow") {
-
       }
     })
   });
