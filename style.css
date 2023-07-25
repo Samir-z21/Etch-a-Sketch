@@ -1,4 +1,6 @@
 body {
+    background: url(./background-pic.jpg) no-repeat center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
