@@ -37,3 +37,18 @@ body {
     width: 19.5px;
     margin: 1px;
 }
+
+.singleBigSquares {
+    background-color: white;
+    height: 9.25px;
+    width: 9.25px;
+    margin: 1px;
+}
+
+#colorCircle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red);
+    cursor: crosshair;
+}

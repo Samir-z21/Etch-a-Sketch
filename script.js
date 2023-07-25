@@ -10,10 +10,8 @@ const container = document.querySelector("#gridContainer");
   let squares = [];
   let numberOfSquares = 16;
   // variables for gridChanges
-  let regular = true;
-  let gridChangedSmall = false;
-  let gridChangedMedium = false;
-  let gridChangedBig = false;
+  let currentClass = 'singleSmallSquares';
+  let currentColor = 'grey'
 
 // create grid and append it
 createGrid()
@@ -25,21 +23,23 @@ function createGrid() {
    for (let i = 0; i <numberOfSquares; i++) {
     let oneColumn = createColumn ();
     wholeGrid.appendChild(oneColumn);
-   }
+   } 
   container.appendChild(wholeGrid)
-
-  // function for changing square colors while hovering
+  // adding hovering effect
   squares.forEach((square) => {
     square.addEventListener('mousemove', () => {
-    changeColor(square)
+    changeColor(square,currentColor)
     });
     });
     
-  function changeColor(square) {
-  square.style.backgroundColor = "grey";
-  }
-   
+   // function to change color
+function changeColor(square, currentColor) {
+  square.style.backgroundColor = currentColor;
+
 }
+}
+
+
 
 // function to create a column with 16 single squares
 function createColumn () {
@@ -47,63 +47,56 @@ function createColumn () {
   column.className = 'columns';
    for (let i = 0; i <numberOfSquares; i++ ){
     singleSquare = document.createElement("div");
-     if (regular) {
-      singleSquare.classList.add('singleSmallSquares')
-     } 
-      else if (gridChangedSmall) {
-      singleSquare.classList.add('singleSmallSquares')
-     } 
-     else if (gridChangedMedium) {
-      singleSquare.classList.add('singleMediumSquares')
-     } 
-     else if (gridChangedBig) {
-      singleSquare.classList.add('singleBigSquares')
-     }
+    singleSquare.classList.add(currentClass);
     column.appendChild(singleSquare);
     squares.push(singleSquare);
-}
+  }
 return column
 }
 
 
-// Code to change grid density
-const density = document.querySelectorAll("#density");
-density.forEach(button => {
+// Code to change grid density and/or clear grid
+const buttons = document.querySelectorAll("#buttons");
+buttons.forEach(button => {
     button.addEventListener('click', function(e) {
       if(e.target.innerText === "Small") {
         numberOfSquares = 16;
-        gridChangedSmall = true;
-        gridChangedMedium = false;
-        gridChangedBig = false;
+        currentClass = 'singleSmallSquares'
         //reseting everything for the new grid
         container.removeChild(wholeGrid);
         squares.length = 0;
-        regular = false;
         createGrid();   
       }
 
       if(e.target.innerText === "Medium") {
         numberOfSquares = 32;
-        gridChangedSmall = false;
-        gridChangedMedium = true;
-        gridChangedBig = false;
+        currentClass = 'singleMediumSquares'
         //reseting everything for the new grid
         container.removeChild(wholeGrid);
         squares.length = 0;
-        regular = false;
         createGrid();   
       }
 
       if(e.target.innerText === "Big") {
         numberOfSquares = 64
-        gridChangedSmall = false;
-        gridChangedMedium = false;
-        gridChangedBig = true;
+        currentClass = 'singleBigSquares'
         //reseting everything for the new grid
         container.removeChild(wholeGrid);
         squares.length = 0;
-        regular = false;
         createGrid(); 
+      }
+
+      if(e.target.innerText === "Clear") {
+        //reseting everything for the new grid
+        container.removeChild(wholeGrid);
+        squares.length = 0;
+        createGrid(); 
+      }
+
+      if(e.target.innerText === "Rainbow") {
+
       }
     })
   });
+
+  const choseColor = document.querySelector('#colorPicker');
